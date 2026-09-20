@@ -1,8 +1,6 @@
 body {
     margin: 0px;
     background: linear-gradient(135deg, #cdcfcf, #ffffff);
-      
-
     font-family: 'Poppins', sans-serif;
     min-height: 100vh;
     margin-bottom: 150px;
@@ -230,4 +228,8 @@ h1 {
     color: #333333;
     margin-bottom: 10px;
     font-weight: bold;
+}
+
+input[type = "file"]{
+    display: none;
 }

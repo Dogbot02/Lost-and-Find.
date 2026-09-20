@@ -53,11 +53,10 @@
           <button class = "button";'${categoryName}')">Claim</button>`
           displayItems.appendChild(object); 
         }
-        const btn = object.querySelector(".claimBtn");
-        btn.addEventListener("click", () => {1
-          set(iref, { ...itemData, Claimed: true });
-        });
-
+       const btn = object.querySelector(".claimBtn");
+        btn.addEventListener("click", () => {
+          update(iref, {CLaimed: true });
+        });   
 
     })
     
