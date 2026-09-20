@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+  import { collection, addDoc, doc, setDoc, getFirestore } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,9 +24,12 @@
 
   import{getDatabase, set, get, ref, push} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
   const database = getDatabase();
+  const firestore = getFirestore(app);
 
 //End of Firebase
-
+document.getElementById("signOut").onclick = function(){
+    window.location.href = "signups.html";
+}
 document.getElementById("newReport").onclick = function(){
     document.getElementsByClassName(`sheet`)[0].style.display = `block`;
     document.getElementById(`newReport`).style.display = `none`;
@@ -37,26 +41,22 @@ document.getElementById("postButton").onclick = function(){
 
 
     //inputboxythingy
+    const reportDate = (new Date()).toISOString();
     const itemName = document.getElementById('itemName').value;
     const category = document.getElementById('category').value;
     const location = document.getElementById('location').value;
     const description = document.getElementById('description').value;
     let isClaimed = false;
     const data = {
+        reportDate,
+        isClaimed,
         itemName,
         category,
         location,
         description
     };
 
-    push(ref(database, `schools/school/items/${category}`),{
-        Item: itemName,
-        Location: location,
-        Description: description,  
-        CLaimed: isClaimed 
-    }
-
-    )
+    addDoc(collection(firestore, "items"),data)
 }
 
 // // //loginpage

@@ -7,16 +7,36 @@
       <link rel="stylesheet" href="home.css">
       <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
         rel="stylesheet">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-      <h1 style="text-align: center;color: black; margin-top: 0">Find<span style =
+  <div class = "header">
+        <div class = "big-profile">
+            <img class = "profile-pic" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt= "profile-pic">
+            <div class = "profile">
+                <h2>Name</h2>
+                <h3>School(zip)</h3>
+            </div>
+    </div>
+        <h1 class = "title"style="color: black; margin-top: 0;">Find<span style =
             "color:hsl(0 ,75%, 52%);">it.</span></h1>
+        <i class="material-icons" id = "signOut">logout</i>
+    </div>
       <nav class = "pages">
         <ul>
             <li><a href="home.html">Home</a></li>
             <li><a href = "itemlist.html">Find</a></li>
             <li><a href="claimed.html">Claimed</a></li>
         </ul>
+    </nav>
+    <nav>
+      <div class = "categories">
+      <button id = "getAll" class = "nav-buttons">All</button>      
+      <button id = "getCatClothes" class = "nav-buttons">Clothing</button>
+      <button id = "getCatSupplies" class = "nav-buttons">Supplies</button>
+      <button id = "getCatTech" class = "nav-buttons">Tech</button>
+      <button id = "getCatOther" class = "nav-buttons">Other</button>
+      </div>
     </nav>
     <div class = "displayItems" id = "displayItems"> 
 

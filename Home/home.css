@@ -6,6 +6,81 @@ body {
     margin-bottom: 150px;
     
 }
+.categories{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.nav-buttons{
+    background: white;
+    color: black;
+    border: 2px solid #000000;
+    border-radius: 12px;
+    padding: 12px 100px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+
+}
+.nav-buttons:hover {
+    background: hsl(0, 75%, 52%);
+    color: white;
+    border-color: hsl(0, 75%, 52%);
+}
+
+
+.nav-buttons:active {
+    transform: scale(0.95);
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    position: relative;
+}
+.big-profile{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    position: absolute;
+    left: 0;
+    background-color: white;
+    border-radius: 30px;
+    padding-right: 35px;
+    margin-left: 25px;
+    margin-top: 10px;
+}
+.profile-pic{
+    height: 75px;
+    width:75px;
+    margin-left: 25px;
+    margin-top: 20px;
+    border-radius: 50%;
+    border: 2px solid black;
+
+    
+}
+.profile{
+
+    margin-left: 15px;
+}
+.title{
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: -10px;
+}
+
+#signOut{
+    position: absolute;
+    right: 0;
+    scale: 150%;
+    margin-top: 35px;
+    margin-right: 25px;
+    background-color: white;
+    border-radius: 15%;
+    padding: 15px;
+}
 
 
 main {
