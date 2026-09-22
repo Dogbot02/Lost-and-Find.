@@ -51,8 +51,13 @@ await setDoc(doc(firestore, "items", doc.id), {
         <label class = "find-item" id = "item-category"><span class = "item-label">Category: </span> ${doc.data().category}</label><br>
         <label class = "find-item" id = "item-location"><span class = "item-label">Location: </span> ${doc.data().location}</label><br>
         <label class = "find-item" id = "item-descriptions"><span class = "item-label">Description: </span> ${doc.data().description}</label><br>
-        <button class = "button";'${doc.data().category}')">Claim</button>`
+        <button class = "Claimbutton" ;'${doc.data().category}')">Claim</button>`
         displayItems.appendChild(object); 
+        document.querySelector("ClaimButton").addEventListener("click", ) = async function(){
+          await setDoc(doc(fstore, "isClaimed", isItemClaimed), {
+          isClaimed: true
+        }, { merge: true});
+      }
       }
   })
 }

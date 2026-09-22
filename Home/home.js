@@ -34,6 +34,10 @@ document.getElementById("newReport").onclick = function(){
     document.getElementsByClassName(`sheet`)[0].style.display = `block`;
     document.getElementById(`newReport`).style.display = `none`;
 }
+document.getElementById("cancelButton").onclick = function(){
+    document.getElementsByClassName('sheet')[0].style.display = 'none';
+    document.getElementById('newReport').style.display = 'block'
+}
 
 document.getElementById("postButton").onclick = function(){
     document.getElementsByClassName(`sheet`)[0].style.display = `none`;
