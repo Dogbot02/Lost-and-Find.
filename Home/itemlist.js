@@ -45,7 +45,7 @@ await setDoc(doc(firestore, "items", doc.id), {
   fitems.forEach((doc) => {
     if(!doc.data().isClaimed){
         const object = document.createElement("div");
-<<<<<<< HEAD
+
         object.classList.add("lostObjects");
         object.innerHTML = 
         `<label class = "find-item" id = "item-name"><span class = "item-label">Name: </span> ${doc.data().itemName}</label><br>
@@ -55,29 +55,13 @@ await setDoc(doc(firestore, "items", doc.id), {
         <button class = "Claimbutton" ;'${doc.data().category}')">Claim</button>`
         displayItems.appendChild(object); 
       }
-=======
-        if(!isClaimed){
-          object.classList.add("lostObjects");
-          object.innerHTML = 
-          `
-          <label class = "find-item" id = "item-name"><span class = "item-label">Name: </span> ${item}</label><br>
-          <label class = "find-item" id = "item-category"><span class = "item-label">Category: </span> ${categoryName}</label><br>
-          <label class = "find-item" id = "item-location"><span class = "item-label">Location: </span> ${location}</label><br>
-          <label class = "find-item" id = "item-descriptions"><span class = "item-label">Description: </span> ${description}</label><br>
-          <button class = "button";'${categoryName}')">Claim</button>`
-          displayItems.appendChild(object); 
         }
-        const btn = object.querySelector(".claimBtn");
-        btn.addEventListener("click", () => {1
-          set(iref, { ...itemData, CLaimed: true });
-        });
-
-
-    })
-    
->>>>>>> refs/remotes/origin/main
-  })
+        );
 }
+    
+
+
+
 
 
 document.getElementById("getAll").addEventListener("click", () => { displayObjects("all");});

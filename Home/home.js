@@ -22,9 +22,7 @@
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
 
-  import{getDatabase, set, get, ref, push} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
-  const database = getDatabase();
-  const firestore = getFirestore(app);
+const fstore = getFirestore(app);
 
 //End of Firebase
 document.getElementById("signOut").onclick = function(){
