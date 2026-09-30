@@ -34,6 +34,12 @@ await setDoc(doc(firestore, "items", doc.id), {
     isClaimed: true
 }, { merge: true });
 */
+
+document.getElementById("signOut").onclick = function(){
+    window.location.href = "signups.html";
+}
+
+
  let getItems;
   if(getCat == "all"){
     getItems = query(collection(fstore, "items"), orderBy("reportDate","desc"));
@@ -42,18 +48,27 @@ await setDoc(doc(firestore, "items", doc.id), {
     getItems = query(collection(fstore, "items"), where("category", "==", getCat), orderBy("reportDate","desc"));
   }
   const fitems = await getDocs(getItems);
-  fitems.forEach((doc) => {
-    if(!doc.data().isClaimed){
+  fitems.forEach((docx) => {
+    if(!docx.data().isClaimed){
         const object = document.createElement("div");
+        const cbtn = document.createElement("button")
 
         object.classList.add("lostObjects");
+        cbtn.classList.add(`Claimbutton`);
+        cbtn.innerText = ("Claim Item :)")
         object.innerHTML = 
-        `<label class = "find-item" id = "item-name"><span class = "item-label">Name: </span> ${doc.data().itemName}</label><br>
-        <label class = "find-item" id = "item-category"><span class = "item-label">Category: </span> ${doc.data().category}</label><br>
-        <label class = "find-item" id = "item-location"><span class = "item-label">Location: </span> ${doc.data().location}</label><br>
-        <label class = "find-item" id = "item-descriptions"><span class = "item-label">Description: </span> ${doc.data().description}</label><br>
-        <button class = "Claimbutton" ;'${doc.data().category}')">Claim</button>`
+        `<label class = "find-item" id = "item-name"><span class = "item-label">Name: </span> ${docx.data().itemName}</label><br>
+        <label class = "find-item" id = "item-category"><span class = "item-label">Category: </span> ${docx.data().category}</label><br>
+        <label class = "find-item" id = "item-location"><span class = "item-label">Location: </span> ${docx.data().location}</label><br>
+        <label class = "find-item" id = "item-descriptions"><span class = "item-label">Description: </span> ${docx.data().description}</label><br>`
         displayItems.appendChild(object); 
+        object.appendChild(cbtn);
+        cbtn.addEventListener(`click`,  async function () {
+          await setDoc(doc(fstore, "items", docx.id), {
+          isClaimed: true
+          }, { merge: true });
+        location.reload();
+        })
       }
         }
         );
@@ -70,6 +85,7 @@ document.getElementById("getCatSupplies").addEventListener("click", () => { disp
 document.getElementById("getCatTech").addEventListener("click", () => { displayObjects("Tech");});
 document.getElementById("getCatOther").addEventListener("click", () => { displayObjects("Other");});
 displayObjects();
+
 
 
 //End of Firebase

@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+  import { collection, addDoc, doc, setDoc, getFirestore, query, getDocs, orderBy, where } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -22,37 +23,62 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 
-import{getDatabase, set, get, ref, push}from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
-const database = getDatabase();
-
-
-async function displayClaimedObjects(){
-  const categories = await get(ref(database, `schools/school/items`));
-  const displayItems = document.getElementById("displayItems");
-
-  categories.forEach(category => {
-    const categoryName = category.key;
-    category.forEach(elements => {
-      const itemData = elements.val();
-      const description = itemData.Description;
-      const item = itemData.Item;
-      const location = itemData.Location;
-      const object = document.createElement("div");
-      let isClaimed = itemData.Claimed;
-      if(isClaimed){
-        object.classList.add("lostObjects");
-        object.innerHTML = 
-        `<label class = "find-item" id = "item-name"><span class = "item-label">Name: </span> ${item}</label><br>
-        <label class = "find-item" id = "item-category"><span class = "item-label">Category: </span> ${categoryName}</label><br>
-        <label class = "find-item" id = "item-location"><spanx class = "item-label">Location: </span> ${location}</label><br>
-        <label class = "find-item" id = "item-descriptions"><span class = "item-label">Description: </span> ${description}</label><br>`;
+async function displayCObjects(getCat = "all"){
+  displayItems.innerHTML = ``;
+  const fstore = getFirestore(app);
+  /*
+  const q = query(collection(db, "users"), where("age", ">", 25));
+const q = query(collection(db, "items"), orderBy("itemName","desc"));
   
-        displayItems.appendChild(object); 
-      }
-    });
-  });
+await setDoc(doc(firestore, "items", doc.id), {
+    isClaimed: true
+}, { merge: true });
+*/
+
+document.getElementById("signOut").onclick = function(){
+    window.location.href = "signups.html";
 }
-displayClaimedObjects();
+
+ let getItems;
+  if(getCat == "all"){
+    getItems = query(collection(fstore, "items"), orderBy("reportDate","desc"));
+  }
+  else {
+    getItems = query(collection(fstore, "items"), where("category", "==", getCat), orderBy("reportDate","desc"));
+  }
+  const fitems = await getDocs(getItems);
+  fitems.forEach((docx) => {
+    if(docx.data().isClaimed){
+        const object = document.createElement("div");
+        const cbtn = document.createElement("button")
+        object.classList.add("lostObjects");
+        cbtn.classList.add(`Claimbutton`);
+        cbtn.innerText = ("Unclaim Item :(")
+        object.innerHTML = 
+        `<label class = "find-item" id = "item-name"><span class = "item-label">Name: </span> ${docx.data().itemName}</label><br>
+        <label class = "find-item" id = "item-category"><span class = "item-label">Category: </span> ${docx.data().category}</label><br>
+        <label class = "find-item" id = "item-location"><span class = "item-label">Location: </span> ${docx.data().location}</label><br>
+        <label class = "find-item" id = "item-descriptions"><span class = "item-label">Description: </span> ${docx.data().description}</label><br>`
+        displayItems.appendChild(object); 
+        object.appendChild(cbtn);
+        cbtn.addEventListener(`click`,  async function () {
+          await setDoc(doc(fstore, "items", docx.id), {
+          isClaimed: false
+          }, { merge: true });
+        location.reload();
+        })
+      }
+        }
+        );
+}
+displayCObjects()    
+
+
+
+document.getElementById("signOut").onclick = function(){
+    window.location.href = "signups.html";
+}
+
 
 
 

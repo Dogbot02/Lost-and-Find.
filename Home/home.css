@@ -1,3 +1,6 @@
+@import "tailwindcss";
+
+
 body {
     margin: 0px;
     background: linear-gradient(135deg, #cdcfcf, #ffffff);
@@ -19,7 +22,6 @@ body {
     border-radius: 12px;
     padding: 12px 100px;
     cursor: pointer;
-    font-size: 16px;
     font-weight: 600;
     transition: all 0.2s ease;
 

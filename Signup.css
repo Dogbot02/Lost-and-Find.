@@ -18,20 +18,20 @@ h3{
 
 .signupPage{
     background-color: white;
-    max-width: 300px;
+    max-width: 18.75em;
     margin: auto;
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.60);
-    padding: 15px 0px;
+    border-radius: 0.625em;
+    box-shadow: 0.3125em 0.3125em 0.3125em hsla(0, 0%, 0%, 0.60);
+    padding: 0.9375em 0em;
 }
 
 #signup{
     font-size: 2rem;
-    margin-top: 20px;
-    border-radius: 5px;
-    border: 1px solid black;
+    margin-top: 1.25em;
+    border-radius: 0.3125em;
+    border: 0.0625em solid black;
     background-color: hsl(210, 2%, 74%);
-    padding: 5px 10px;
+    padding: 0.3125em 0.625em;
     cursor: pointer;
 }
 
@@ -46,13 +46,13 @@ h3{
 
 input{
     font-size: 1.25rem;
-    margin: 10px 0px;
+    margin: 0.625em 0em;
 }
 
 input:focus{
     outline: none;
-    border: 2px solid black;
-    border-radius: 5px;
+    border: 0.125em solid black;
+    border-radius: 0.3125em;
 }
 
 #error{
