@@ -1,6 +1,69 @@
 @import "tailwindcss";
 
+/*#region Popup*/
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+.popup-button{
 
+    outline: none;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin: 30px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: .2s all ease-in-out;
+
+}
+.popup-button:hover{
+    background-color: ab1111;
+}
+#popup{
+    display: none;
+}
+.popup-container{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    scale: 150%
+}
+.popup{
+    background-color: #ffffff;
+    padding: 20px 30px;
+    width: 25%;
+    border-radius: 15px;
+}
+.close-popup{
+    display: flex;
+    justify-content: flex-end;
+}
+.close-popup a{
+    font-size: 1.2rem;
+    background-color: hsl(0, 75%, 52%);
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/*#endregion*/
+
+button{
+    box-shadow: 1px 6px 12px 0px rgb(0 0 0 / 13%);box-shadow: 1px 6px 12px 0px rgb(0 0 0 / 13%);
+}
 body {
     margin: 0px;
     background: linear-gradient(135deg, #cdcfcf, #ffffff);
@@ -48,11 +111,11 @@ body {
     justify-content: left;
     position: absolute;
     left: 0;
-    background-color: white;
     border-radius: 30px;
     padding-right: 35px;
     margin-left: 25px;
     margin-top: 10px;
+    color: black;
 }
 .profile-pic{
     height: 75px;
@@ -65,7 +128,7 @@ body {
     
 }
 .profile{
-
+    text-align: center;
     margin-left: 15px;
 }
 .title{

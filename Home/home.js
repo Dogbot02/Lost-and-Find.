@@ -1,7 +1,9 @@
 // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
   import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
-  import { collection, addDoc, doc, setDoc, getFirestore } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+  import { collection, addDoc, doc, setDoc, getDoc, getFirestore } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+  import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -21,10 +23,45 @@
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  
 
 const fstore = getFirestore(app);
 
 //End of Firebase
+
+
+async function UserStuff(){
+    const auth = getAuth();
+    await auth.authStateReady();
+    const user = auth.currentUser;
+    console.log(user);
+    if(!user) {
+        document.location = "signin.html";
+    }
+    else
+      {
+        const userId = user.uid;
+        const fstore = getFirestore(app);
+        const userInfo = (await getDoc(doc(fstore, "users", userId))).data();
+        console.log(userInfo);
+        const Name = userInfo.Name;
+        const School = userInfo.School;
+        const Zip = userInfo.Zip;
+        document.getElementById("pname").textContent = Name;
+        document.getElementById("pschool").textContent = `${School}(${Zip})`;
+    }
+}
+
+UserStuff();
+
+
+
+
+
+
+//#region Report stuff
+
+
 document.getElementById("signOut").onclick = function(){
     window.location.href = "signups.html";
 }
@@ -58,17 +95,10 @@ document.getElementById("postButton").onclick = function(){
         description
     };
 
-    addDoc(collection(firestore, "items"),data)
+    addDoc(collection(fstore, "items"),data)
 }
 
-// // //loginpage
-// function loginbutton(){
-//     const nameS = document.getElementById('name').value;
-//     const emailS = document.getElementById('emailS').value;
-//     const passwordS = document.getElementById('passwordS').value;
-//     const pn = document.getElementById('pnS').value;
-//     const schoolS = document.getElementById('schoolS').value;
-//     const zipS = document.getElementById('zipS').value;
-// }
+
+//#endregion
 
 

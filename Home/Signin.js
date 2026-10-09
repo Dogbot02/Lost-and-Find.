@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
+import { collection, addDoc, doc, setDoc, getFirestore, query, getDocs, orderBy, where } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,29 +22,28 @@ measurementId: "G-PWX9Z4P5J7"
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-import { getDatabase, set, ref, onValue } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
-const database = getDatabase();
+
 
 const error2 = document.getElementById("error2");
 
 const signin = document.getElementById("signin");
-signin.onclick = function(){
-    error2.textContent = "";
-    const username2 = document.getElementById("username2").value;
-    const password2 = document.getElementById("password2").value;
-    const school2 = document.getElementById("school2").value;
-    onValue(ref(database, `schools/${school2}/${username2}`), (snapshot) => {
-        if(snapshot.exists()){
-            if(snapshot.val().credentials.password === password2){
-                error2.style.color = "black";
-                error2.textContent = "Login successful!";
-            }
-            else{
-                error2.innerHTML = "Incorrect username, password, or school";
-            }
-        }
-        else{
-            error2.innerHTML = "Incorrect username, password, or school";
-        }
+
+
+document.getElementById("signin").addEventListener("click", async () => {
+    const email = document.getElementById("email2").value;
+    const password = document.getElementById("password2").value;
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        document.location = "/Home/home.html";
+    })
+    .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error(errorCode);
+        console.error(errorMessage);
     });
-}
+
+})

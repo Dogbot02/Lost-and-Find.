@@ -2,7 +2,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
 import { collection, addDoc, doc, setDoc, getFirestore, query, getDocs, orderBy, where } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-import { getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -41,7 +42,6 @@ signUpButton.addEventListener("click", ()=>{
       Phone: Phone,
       School: School,
       Zip: Zip,
-      Password: Password
     }
     createUserWithEmailAndPassword(auth, Email, Password)
     .then((userCredential) => {

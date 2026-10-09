@@ -1,7 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
-  import { collection, addDoc, doc, setDoc, getFirestore, query, getDocs, orderBy, where } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { collection, addDoc, doc, setDoc, getFirestore, query, getDoc, getDocs, orderBy, where } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -81,6 +82,29 @@ document.getElementById("signOut").onclick = function(){
 
 
 
+async function UserStuff(){
+    const auth = getAuth();
+    await auth.authStateReady();
+    const user = auth.currentUser;
+    console.log(user);
+    if(!user) {
+        document.location = "signin.html";
+    }
+    else
+      {
+        const userId = user.uid;
+        const fstore = getFirestore(app);
+        const userInfo = (await getDoc(doc(fstore, "users", userId))).data();
+        console.log(userInfo);
+        const Name = userInfo.Name;
+        const School = userInfo.School;
+        const Zip = userInfo.Zip;
+        document.getElementById("pname").textContent = Name;
+        document.getElementById("pschool").textContent = `${School}(${Zip})`;
+    }
+}
+
+UserStuff();
 
 
 
